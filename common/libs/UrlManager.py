@@ -5,14 +5,14 @@ class UrlManager(object):
         pass
 
     @staticmethod
-    def buidUrl(path):
+    def buildUrl(path):
         return path
     
     @staticmethod
     def buildStaticUrl(path):
         ver = "%s"%(int(time.time()))
         path = "/static" + path + "?version=" + ver
-        return UrlManager.buidUrl(path)
+        return UrlManager.buildUrl(path)
 
     @staticmethod
     def buildImageUrl(path):
