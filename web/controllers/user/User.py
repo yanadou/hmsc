@@ -1,6 +1,8 @@
-from flask import Blueprint,render_template,request,jsonify,make_response
+from flask import Blueprint,render_template,request,jsonify,make_response,redirect,g
 from common.models.User import User
 from common.libs.user.UserService import UserService
+from common.libs.UrlManager import UrlManager
+from common.libs.Helper import ops_render
 
 import json
 
@@ -9,8 +11,11 @@ router_user = Blueprint('user_page',__name__)
 @router_user.route("/login",methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template("user/login.html")
-    
+        if g.current_user:
+            return redirect(UrlManager.buildUrl("/"))
+        return ops_render("user/login.html")
+        
+    # POST请求
     resp = {
         'code':200,
         'msg':'登录成功',
